@@ -1,5 +1,4 @@
 # Sistema de Biblioteca em C++
-
 Projeto Final de **Programação e Sistemas Computacionais II** — Centro Universitário Campo Real, Engenharia de Software, 2026/1 (prof. Giovane Galvão).
 
 **Squad:** Gabriel Krupek e Gustavo Borges
