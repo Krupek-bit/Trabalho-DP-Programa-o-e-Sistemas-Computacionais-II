@@ -40,7 +40,6 @@ Recursividade: inserção, busca, travessia in-ordem, contagem e liberação da
 ABB, e a contagem de registros do histórico (caso base: ponteiro nulo).
 
 3. GERENCIAMENTO DE MEMÓRIA
-
 Todo nó (de ABB, lista, fila e pilha) é criado com new e liberado com delete.
 Ao encerrar, liberarBiblioteca() libera a ABB em pós-ordem (filhos antes do
 pai, e a fila de reservas de cada livro), a lista de usuários com o histórico de
