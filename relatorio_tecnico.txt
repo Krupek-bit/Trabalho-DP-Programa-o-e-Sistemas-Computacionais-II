@@ -52,7 +52,6 @@ O programa foi testado com AddressSanitizer (g++ -fsanitize=address) e não
 apresentou vazamentos nem acessos inválidos.
 
 4. LIMITAÇÕES CONHECIDAS
-
 - A ABB não é balanceada.
 - Desfazer um empréstimo não devolve o usuário à fila de reservas que ele
   já havia cumprido.
