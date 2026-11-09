@@ -25,7 +25,6 @@ seja, LIFO. Empilhar e desempilhar são O(1). Como a ordem é estritamente LIFO,
 o registro a remover do histórico do usuário é sempre o último da lista.
 
 2. ALGORITMOS
-
 Ordenação: Insertion Sort por título. Complexidade O(n²) no pior caso e médio,
 O(n) no melhor caso, espaço extra O(1), estável. Escolhido por ser simples de
 explicar e adequado ao tamanho de um acervo pequeno. O vetor ordenado guarda
