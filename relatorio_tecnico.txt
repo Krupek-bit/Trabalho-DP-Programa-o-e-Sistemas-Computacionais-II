@@ -3,7 +3,6 @@ Programação e Sistemas Computacionais II — Campo Real — 2026/1
 Squad: Gabriel Krupek e Gustavo Borges
 
 1. ESCOLHA DAS ESTRUTURAS DE DADOS
-
 ABB (catálogo). Os livros são buscados o tempo todo por código (empréstimo,
 devolução, reserva). Na ABB a busca e a inserção custam O(h), que é O(log n)
 quando a árvore está razoavelmente balanceada, bem melhor que O(n) de uma lista.
