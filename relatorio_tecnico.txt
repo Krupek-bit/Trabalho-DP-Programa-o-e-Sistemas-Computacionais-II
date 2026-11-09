@@ -1,0 +1,59 @@
+RELATÓRIO TÉCNICO — SISTEMA DE BIBLIOTECA EM C++
+Programação e Sistemas Computacionais II — Campo Real — 2026/1
+Squad: Gabriel Krupek e Gustavo Borges
+
+1. ESCOLHA DAS ESTRUTURAS DE DADOS
+
+ABB (catálogo). Os livros são buscados o tempo todo por código (empréstimo,
+devolução, reserva). Na ABB a busca e a inserção custam O(h), que é O(log n)
+quando a árvore está razoavelmente balanceada, bem melhor que O(n) de uma lista.
+Além disso, a travessia in-ordem entrega os livros já em ordem de código, sem
+precisar ordenar. Limitação: a árvore não é auto-balanceável; se os códigos
+forem inseridos já em ordem crescente, ela degenera em uma lista (O(n)). Por
+isso, nos dados de teste, os códigos são embaralhados.
+
+Lista encadeada (histórico e usuários). O histórico de cada usuário só cresce
+no final e é percorrido do início ao fim; não sabemos o tamanho de antemão e
+não precisamos de acesso por índice. A lista evita desperdício e realocação
+de um vetor. A remoção do último registro é usada pelo "desfazer".
+
+Fila (reservas). A regra de negócio é "quem reservou primeiro leva o livro
+primeiro", que é exatamente a semântica FIFO. Cada livro tem sua própria fila.
+Enfileirar e desenfileirar são O(1), pois a fila mantém ponteiros para início e fim.
+
+Pilha (desfazer). A última ação feita deve ser a primeira a ser desfeita, ou
+seja, LIFO. Empilhar e desempilhar são O(1). Como a ordem é estritamente LIFO,
+o registro a remover do histórico do usuário é sempre o último da lista.
+
+2. ALGORITMOS
+
+Ordenação: Insertion Sort por título. Complexidade O(n²) no pior caso e médio,
+O(n) no melhor caso, espaço extra O(1), estável. Escolhido por ser simples de
+explicar e adequado ao tamanho de um acervo pequeno. O vetor ordenado guarda
+ponteiros (Livro*) em vez de cópias, o que torna as trocas baratas e evita
+duplicar as filas de reserva.
+
+Busca: a sequencial é O(n) e não exige ordenação; a binária é O(log n), mas
+exige vetor ordenado (por isso o sistema ordena antes de buscar). A opção 10 do
+menu conta as comparações: com 105 livros, a busca de um título perto do fim
+levou 101 comparações na sequencial contra 7 na binária.
+
+Recursividade: inserção, busca, travessia in-ordem, contagem e liberação da
+ABB, e a contagem de registros do histórico (caso base: ponteiro nulo).
+
+3. GERENCIAMENTO DE MEMÓRIA
+
+Todo nó (de ABB, lista, fila e pilha) é criado com new e liberado com delete.
+Ao encerrar, liberarBiblioteca() libera a ABB em pós-ordem (filhos antes do
+pai, e a fila de reservas de cada livro), a lista de usuários com o histórico de
+cada um e a pilha de ações. Ponteiros liberados recebem nullptr. Os vetores
+temporários de ordenação/busca usam new[] e delete[] na mesma função.
+O programa foi testado com AddressSanitizer (g++ -fsanitize=address) e não
+apresentou vazamentos nem acessos inválidos.
+
+4. LIMITAÇÕES CONHECIDAS
+
+- A ABB não é balanceada.
+- Desfazer um empréstimo não devolve o usuário à fila de reservas que ele
+  já havia cumprido.
+- O programa não grava dados em arquivo: ao sair, o acervo é perdido.
